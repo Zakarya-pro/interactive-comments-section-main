@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comments App Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f5f5f5;
+    }
+    .test-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .test-form {
+      margin-bottom: 20px;
+    }
+    .test-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      color: #333;
+      background: white;
+      resize: vertical;
+    }
+    .test-button {
+      background: #5865F2;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .test-button:hover {
+      background: #4752C4;
+    }
+    .test-output {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      border-left: 4px solid #5865F2;
+    }
+    .status {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .status.success { background: #d4edda; color: #155724; }
+    .status.error { background: #f8d7da; color: #721c24; }
+    .status.info { background: #d1ecf1; color: #0c5460; }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>Comments App Debug Test</h1>
+    
+    <div class="test-form">
+      <h3>Test Form Functionality</h3>
+      <form id="test-form">
+        <textarea 
+          id="test-textarea" 
+          class="test-textarea" 
+          placeholder="Type something here to test visibility..."
+          rows="4"></textarea>
+        <br>
+        <button type="submit" class="test-button">Test Submit</button>
+      </form>
+    </div>
+
+    <div class="test-output">
+      <h3>Debug Information</h3>
+      <div id="debug-info"></div>
+    </div>
+
+    <div class="status info">
+      <strong>Instructions:</strong>
+      <ol>
+        <li>Type in the textarea above - you should see the text clearly</li>
+        <li>Click "Test Submit" to test form functionality</li>
+        <li>Check the debug information below</li>
+        <li>Open browser console (F12) for additional logs</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    // Test script
+    document.addEventListener('DOMContentLoaded', function() {
+      const debugInfo = document.getElementById('debug-info');
+      const testForm = document.getElementById('test-form');
+      const testTextarea = document.getElementById('test-textarea');
+      
+      function addDebugInfo(message, type = 'info') {
+        const div = document.createElement('div');
+        div.className = `status ${type}`;
+        div.innerHTML = `<strong>${new Date().toLocaleTimeString()}:</strong> ${message}`;
+        debugInfo.appendChild(div);
+        console.log(`[${type.toUpperCase()}] ${message}`);
+      }
+
+      // Initial debug info
+      addDebugInfo('Page loaded successfully', 'success');
+      addDebugInfo(`User Agent: ${navigator.userAgent}`, 'info');
+      addDebugInfo(`Viewport: ${window.innerWidth}x${window.innerHeight}`, 'info');
+      
+      // Test localStorage
+      try {
+        localStorage.setItem('test', 'test');
+        localStorage.removeItem('test');
+        addDebugInfo('localStorage is working', 'success');
+      } catch (e) {
+        addDebugInfo('localStorage error: ' + e.message, 'error');
+      }
+
+      // Test form submission
+      testForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const value = testTextarea.value.trim();
+        if (value) {
+          addDebugInfo(`Form submitted with text: "${value}"`, 'success');
+          addDebugInfo(`Text length: ${value.length} characters`, 'info');
+        } else {
+          addDebugInfo('Form submitted but textarea is empty', 'error');
+        }
+      });
+
+      // Test textarea input
+      testTextarea.addEventListener('input', function(e) {
+        const value = e.target.value;
+        addDebugInfo(`Textarea input detected: ${value.length} characters`, 'info');
+      });
+
+      // Test if main app files are accessible
+      const scripts = ['js/utils.js', 'js/storage.js', 'js/components.js', 'js/app.js'];
+      scripts.forEach(script => {
+        fetch(script)
+          .then(response => {
+            if (response.ok) {
+              addDebugInfo(`✓ ${script} is accessible`, 'success');
+            } else {
+              addDebugInfo(`✗ ${script} returned ${response.status}`, 'error');
+            }
+          })
+          .catch(err => {
+            addDebugInfo(`✗ ${script} failed to load: ${err.message}`, 'error');
+          });
+      });
+
+      // Test CSS files
+      const styles = ['styles/variables.css', 'styles/reset.css', 'styles/base.css', 'styles/components.css', 'styles/layout.css'];
+      styles.forEach(style => {
+        fetch(style)
+          .then(response => {
+            if (response.ok) {
+              addDebugInfo(`✓ ${style} is accessible`, 'success');
+            } else {
+              addDebugInfo(`✗ ${style} returned ${response.status}`, 'error');
+            }
+          })
+          .catch(err => {
+            addDebugInfo(`✗ ${style} failed to load: ${err.message}`, 'error');
+          });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+/* CSS Custom Properties (Variables) */
+:root {
+    /* Colors - Primary */
+    --color-primary-purple-600: hsl(238, 40%, 52%);
+    --color-primary-pink-400: hsl(358, 79%, 66%);
+    --color-primary-purple-200: hsl(239, 57%, 85%);
+    --color-primary-pink-200: hsl(357, 100%, 86%);
+
+    /* Colors - Neutral */
+    --color-neutral-grey-800: hsl(212, 24%, 26%);
+    --color-neutral-grey-500: hsl(211, 10%, 45%);
+    --color-neutral-grey-100: hsl(223, 19%, 93%);
+    --color-neutral-grey-50: hsl(228, 33%, 97%);
+    --color-white: hsl(0, 100%, 100%);
+
+    /* Typography */
+    --font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size-base: 16px;
+    --font-size-sm: 14px;
+    --font-size-xs: 12px;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+    /* Line Heights */
+    --line-height-base: 1.5;
+    --line-height-tight: 1.25;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    /* 4px */
+    --spacing-sm: 0.5rem;
+    /* 8px */
+    --spacing-md: 1rem;
+    /* 16px */
+    --spacing-lg: 1.5rem;
+    /* 24px */
+    --spacing-xl: 2rem;
+    /* 32px */
+    --spacing-2xl: 2.5rem;
+    /* 40px */
+    --spacing-3xl: 3rem;
+    /* 48px */
+
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    /* Transitions */
+    --transition-fast: 150ms ease-in-out;
+    --transition-normal: 250ms ease-in-out;
+    --transition-slow: 350ms ease-in-out;
+
+    /* Z-index */
+    --z-index-dropdown: 10;
+    --z-index-modal: 50;
+    --z-index-overlay: 40;
+
+    /* Breakpoints (for use in media queries) */
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+}
+
+/* Dark mode variables (optional for future enhancement) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-neutral-grey-800: hsl(0, 0%, 95%);
+        --color-neutral-grey-500: hsl(0, 0%, 70%);
+        --color-neutral-grey-100: hsl(210, 20%, 15%);
+        --color-neutral-grey-50: hsl(210, 20%, 10%);
+        --color-white: hsl(210, 20%, 8%);
+    }
+}
